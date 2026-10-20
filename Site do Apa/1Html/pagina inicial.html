@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>🌲Nocturne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../2CSS/pagina inicial.css">
+</head>
+
+<body>
+    <canvas id="cv"></canvas>
+    <div class="wrap">
+        <!-- A coruja (sem chapéu) e as videiras de flores azuis são criadas pelo JS -->
+        <div class="pad"><canvas class="vs" id="v1" width="14" height="16"></canvas><canvas class="vs" id="v2" width="14"
+                height="16"></canvas><canvas class="vs" id="v3" width="14" height="16"></canvas>
+            <div class="ph">
+                <h2>Notas da Noite</h2><span class="cnt"><b id="cnt">0</b> notas</span><button class="nb" id="nw">+
+                    Novo</button>
+            </div>
+            <div class="ml" id="ml"></div>
+        </div>
+    </div>
+    <div class="ed" id="ed">
+        <div class="big"><input id="ntt" maxlength="40" placeholder="Título">
+            <div class="meta"><span id="dt"></span><span id="ct"></span></div><textarea id="nt" maxlength="8000"
+                placeholder="Escreva aqui..."></textarea>
+            <div class="bar"><button class="b" id="cl">Fechar</button><button class="b del" id="dl">Excluir</button>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="logo"><canvas id="lg" width="7" height="7"></canvas>Nocturne</div>
+        <div class="act">
+            <button class="btn alt" id="tg">☾</button>
+            <!-- id="rg": o JS leva ao registro (loginouregistro.html) e, depois do cadastro, troca este botão pelo ícone de usuário -->
+            <button class="btn" id="rg">Cadastre-se</button>
+        </div>
+    </header>
+
+    <!-- Abóbora: leva para a Hora da festividade -->
+    <a id="pk" href="halloween.html" title="Hora da festividade" aria-label="Hora da festividade">
+        <canvas width="16" height="16"></canvas>
+    </a>
+
+    <script src="../3Js/paginaincial.js"></script>
+    <script src="../3Js/abobora.js"></script>
+    <script src="../3Js/calendario.js"></script>
+    <script src="../3Js/minigame.js"></script>
+    <script src="../3Js/recursos.js"></script>
+
+</body>
+
+</html>

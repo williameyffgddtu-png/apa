@@ -1,0 +1,99 @@
+* { box-sizing: border-box; margin: 0 }
+html, body { height: 100%; overflow: hidden; background: #050a1f; font-family: 'Press Start 2P', monospace }
+#cv { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; image-rendering: pixelated }
+header { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; padding-top: calc(14px + env(safe-area-inset-top, 0px)); z-index: 10 }
+.logo { display: flex; align-items: center; gap: 12px; color: #e6efff; font-size: 16px; text-shadow: 3px 3px #0a1a40 }
+.logo canvas { width: 28px; height: 28px; image-rendering: pixelated }
+.act { display: flex; gap: 12px; align-items: center }
+.btn { font: inherit; font-size: 10px; color: #fff; background: #3b6fd8; border: 0; padding: 12px 14px; cursor: pointer; box-shadow: inset -4px -4px #274a9a, inset 4px 4px #6a9bf5, 0 0 0 4px #14295e }
+.btn.alt { background: #2c3f6e; box-shadow: inset -4px -4px #1b2850, inset 4px 4px #4d669f, 0 0 0 4px #14295e }
+.btn:active { transform: translateY(2px) }
+.day .logo { color: #17324f; text-shadow: 2px 2px #e4f0f8 }
+.day .btn.alt { background: #fff; color: #17324f; box-shadow: inset -4px -4px #c3d3e0, inset 4px 4px #fff, 0 0 0 4px #7fa3c4 }
+.day .btn { box-shadow: inset -4px -4px #274a9a, inset 4px 4px #6a9bf5, 0 0 0 4px #7fa3c4 }
+.wrap { position: fixed; top: calc(84px + env(safe-area-inset-top, 0px)); left: 0; right: 0; display: flex; justify-content: center; z-index: 5; pointer-events: none }
+
+/* troque a regra .pad (só width e padding mudam) */
+.pad { position: relative; pointer-events: auto; width: min(94vw, 620px); background: #fdf6dc; border: 4px solid #5a3519; box-shadow: inset 0 -4px #e6d9aa, 6px 6px 0 rgba(0, 0, 0, .35); padding: 24px 16px 14px }
+
+.pad:before, .big:before { content: ''; position: absolute; top: -11px; left: 10px; right: 10px; height: 14px; background: radial-gradient(circle at 50% 50%, #2a2a34 0 3px, #9aa 3px 5px, transparent 5.5px) 0 0/20px 14px repeat-x }
+.pad>canvas { position: absolute; image-rendering: pixelated; filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, .3)) }
+.vs { width: 42px; height: 48px }
+#v1 { left: -24px; bottom: -18px }
+#v2 { right: -24px; bottom: -14px }
+#v3 { left: 18px; top: -46px }
+.ph { display: flex; align-items: center; gap: 8px; margin-bottom: 6px }
+
+/* títulos e botão */
+.ph h2 { font-size: 11px; color: #5a3519; flex: 1; text-shadow: 1px 1px #e6d9aa }
+.cnt { font-size: 8px; color: #8a6a40 }
+.nb { font: inherit; font-size: 10px; color: #fff; background: #3fa38a; border: 0; padding: 10px 12px; cursor: pointer; box-shadow: inset -3px -3px #2a7a66, inset 3px 3px #6cd0b4, 0 0 0 3px #1d4f45 }
+.nb:active, .b:active { transform: translateY(2px) }
+
+/* lista de notas */
+.ml { display: flex; gap: 10px; overflow-x: auto; padding: 16px 6px 8px; min-height: 170px; background: repeating-linear-gradient(#fdf6dc 0 19px, #cfe0f0 19px 20px) }
+.mini { flex: 0 0 52px; height: 130px; border: 0; cursor: pointer; background: var(--c); box-shadow: inset -3px 0 rgba(0, 0, 0, .25), inset 3px 3px rgba(255, 255, 255, .3), 0 0 0 3px #3a2410; color: #fff; font: inherit; padding: 10px 0 6px; display: flex; justify-content: center; transition: transform .15s }
+.mini:hover { transform: translateY(-5px) }
+.mini .mt { writing-mode: vertical-rl; font-size: 9px; max-height: 108px; overflow: hidden; text-shadow: 1px 1px rgba(0, 0, 0, .4) }
+.mini.new { animation: pop .5s }
+@keyframes pop { 0% { transform: scale(0) translateY(20px) } 70% { transform: scale(1.15) } 100% { transform: none } }
+.empty { font-size: 8px; line-height: 16px; color: #8a6a40; align-self: center; text-align: center; width: 100% }
+.ed { position: fixed; inset: 0; z-index: 20; display: flex; align-items: flex-start; justify-content: center; padding: calc(70px + env(safe-area-inset-top, 0px)) 12px 12px; background: rgba(5, 10, 31, .6); opacity: 0; pointer-events: none; transition: opacity .2s }
+.ed.on { opacity: 1; pointer-events: auto }
+.big { position: relative; width: min(94vw, 560px); height: min(76vh, 520px); display: flex; flex-direction: column; background: #fdf6dc; border: 4px solid #5a3519; box-shadow: inset 0 -4px #e6d9aa, 8px 8px 0 rgba(0, 0, 0, .4); padding: 20px 16px 12px; transform: translateY(-30px) scale(.4); transform-origin: 50% 0; transition: transform .25s cubic-bezier(.2, 1.2, .4, 1) }
+.ed.on .big { transform: none }
+.big input { font: inherit; font-size: 11px; border: 0; border-bottom: 3px solid #5a3519; background: transparent; color: #5a3519; padding: 4px 0; outline: 0 }
+.meta { display: flex; justify-content: space-between; font-size: 7px; color: #8a6a40; margin: 6px 0 }
+.big textarea { flex: 1; resize: none; border: 0; outline: 0; background: repeating-linear-gradient(#fdf6dc 0 21px, #cfe0f0 21px 22px); font: 10px/22px 'Press Start 2P', monospace; color: #2a1c10 }
+.bar { display: flex; gap: 10px; justify-content: space-between; margin-top: 10px }
+.b { font: inherit; font-size: 9px; color: #fff; background: #3b6fd8; border: 0; padding: 10px 12px; cursor: pointer; box-shadow: inset -3px -3px #274a9a, inset 3px 3px #6a9bf5, 0 0 0 3px #14295e }
+.b.del { background: #c8504a; box-shadow: inset -3px -3px #8a2a26, inset 3px 3px #e88a84, 0 0 0 3px #4a1210 }
+
+/* ============ CORUJA / REGISTRO ============ */
+/* corujas antigas (canvas #ow e #ow2) escondidas: a coruja viva é desenhada pelo paginaincial.js */
+#ow, #ow2 { display: none !important }
+/* botão de cadastro pulsa quando a coruja pede o registro */
+.pulse { animation: regp .6s ease-in-out 4 }
+@keyframes regp { 50% { transform: translateY(-5px) scale(1.1) } }
+/* ícone do usuário registrado */
+#usr { display: flex; align-items: center; justify-content: center }
+
+/* ============ HALLOWEEN ============ */
+/* abóbora acesa (página inicial) -> leva para a Hora da festividade */
+#pk { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 64px; height: 64px; z-index: 15; display: block; cursor: pointer; background: none; border: 0; transition: transform .15s }
+#pk canvas { width: 100%; height: 100%; image-rendering: pixelated; filter: drop-shadow(3px 4px 0 rgba(0, 0, 0, .35)) }
+#pk:hover { transform: translateY(-4px) rotate(-4deg) }
+#pk.lit canvas { filter: drop-shadow(0 0 10px rgba(255, 150, 40, .9)) drop-shadow(3px 4px 0 rgba(0, 0, 0, .35)) }
+/* na página do Halloween, esconde a abóbora criada pelo abobora.js */
+.hwp #pk { display: none }
+/* abóbora apagada (página do Halloween) -> Voltar da festividade */
+#bk { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 64px; height: 64px; z-index: 15; display: block; cursor: pointer; transition: transform .15s }
+#bk canvas { width: 100%; height: 100%; image-rendering: pixelated; filter: drop-shadow(3px 4px 0 rgba(0, 0, 0, .35)) }
+#bk:hover { transform: translateY(-4px) rotate(4deg) }
+#bk:hover:after { content: 'Voltar da festividade'; position: absolute; right: 0; bottom: 76px; white-space: nowrap; font-size: 8px; color: #fff; background: #2c3f6e; padding: 8px 10px; box-shadow: 0 0 0 3px #14295e }
+
+/* ===== Bloco de notas decorado (modo Halloween) ===== */
+.hw .pad { background: #2a1a3a; border-color: #14061c; box-shadow: inset 0 -4px #1c1028, 0 0 18px rgba(255, 120, 30, .35), 6px 6px 0 rgba(0, 0, 0, .45); animation: hwglow 3s ease-in-out infinite alternate }
+@keyframes hwglow {
+  from { box-shadow: inset 0 -4px #1c1028, 0 0 12px rgba(255, 120, 30, .25), 6px 6px 0 rgba(0, 0, 0, .45) }
+  to { box-shadow: inset 0 -4px #1c1028, 0 0 24px rgba(255, 120, 30, .5), 6px 6px 0 rgba(0, 0, 0, .45) }
+}
+.hw .ph h2 { color: #ffb060; text-shadow: 1px 1px #14061c }
+.hw .ph h2:before { content: '🎃 ' }
+.hw .cnt { color: #c9a0e8 }
+.hw .ml { background: repeating-linear-gradient(#2a1a3a 0 19px, #3c2a54 19px 20px) }
+.hw .empty { color: #c9a0e8 }
+.hw .pad:after { content: '🕸️'; position: absolute; top: -6px; right: -8px; font-size: 22px; filter: drop-shadow(0 0 4px #b070ff); pointer-events: none }
+.hw .mini { box-shadow: inset -3px 0 rgba(0, 0, 0, .25), inset 3px 3px rgba(255, 255, 255, .3), 0 0 0 3px #14061c, 0 0 8px rgba(255, 140, 40, .5) }
+.hw .mini:hover { box-shadow: inset -3px 0 rgba(0, 0, 0, .25), inset 3px 3px rgba(255, 255, 255, .3), 0 0 0 3px #14061c, 0 0 14px rgba(255, 140, 40, .9) }
+.hw .nb { background: #e8761a; box-shadow: inset -3px -3px #a8480a, inset 3px 3px #ffa84a, 0 0 0 3px #3a1408 }
+.hw .nb:hover { filter: brightness(1.15) }
+/* editor */
+.hw .big { background: #2a1a3a; border-color: #14061c; box-shadow: inset 0 -4px #1c1028, 0 0 24px rgba(255, 120, 30, .4), 8px 8px 0 rgba(0, 0, 0, .5) }
+.hw .big:after { content: '👻'; position: absolute; top: -14px; right: 14px; font-size: 16px; pointer-events: none }
+.hw .big input { color: #ffb060; border-bottom-color: #e8761a }
+.hw .big input::placeholder { color: #8a6aa8 }
+.hw .meta { color: #c9a0e8 }
+.hw .big textarea { background: repeating-linear-gradient(#2a1a3a 0 21px, #3c2a54 21px 22px); color: #f0e0ff; caret-color: #ff9a2a }
+.hw .big textarea::placeholder { color: #8a6aa8 }
+.hw ::selection { background: #e8761a; color: #fff }

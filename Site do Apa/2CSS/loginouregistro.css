@@ -1,0 +1,74 @@
+* { box-sizing: border-box; margin: 0 }
+html, body { height: 100%; overflow: hidden; background: #050a1f; font-family: 'Press Start 2P', monospace }
+html.hw, html.hw body { background: #1b0d30 }
+#cv { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; image-rendering: pixelated }
+
+/* ===== cabeçalho ===== */
+header { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; padding-top: calc(14px + env(safe-area-inset-top, 0px)); z-index: 10 }
+.logo { display: flex; align-items: center; gap: 12px; color: #e6efff; font-size: 16px; text-shadow: 3px 3px #0a1a40 }
+.logo canvas { width: 28px; height: 28px; image-rendering: pixelated }
+.act { display: flex; gap: 12px; align-items: center }
+.btn { font: inherit; font-size: 10px; color: #fff; background: #3b6fd8; border: 0; padding: 12px 14px; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: inset -4px -4px #274a9a, inset 4px 4px #6a9bf5, 0 0 0 4px #14295e }
+.btn.alt { background: #2c3f6e; box-shadow: inset -4px -4px #1b2850, inset 4px 4px #4d669f, 0 0 0 4px #14295e }
+.btn:active { transform: translateY(2px) }
+
+/* ===== cartão (bloco de notas) ===== */
+.wrap { position: fixed; top: calc(84px + env(safe-area-inset-top, 0px)); bottom: 0; left: 0; right: 0; display: flex; justify-content: center; align-items: flex-start; padding: 64px 14px 44px; overflow-y: auto; z-index: 5; animation: rise .5s cubic-bezier(.2, 1.2, .4, 1) }
+@keyframes rise { from { opacity: 0; transform: translateY(24px) } to { opacity: 1; transform: none } }
+.card { position: relative; width: min(88vw, 380px); background: #fdf6dc; border: 4px solid #5a3519; box-shadow: inset 0 -4px #e6d9aa, 6px 6px 0 rgba(0, 0, 0, .35); padding: 22px 14px 14px }
+.card:before { content: ''; position: absolute; top: -11px; left: 10px; right: 10px; height: 14px; background: radial-gradient(circle at 50% 50%, #2a2a34 0 3px, #9aa 3px 5px, transparent 5.5px) 0 0/20px 14px repeat-x }
+.card.shake { animation: shake .4s }
+@keyframes shake { 20%, 60% { transform: translateX(-6px) } 40%, 80% { transform: translateX(6px) } }
+
+/* abas = lombadas de caderno */
+.tabs { display: flex; gap: 6px; margin: 0 0 14px }
+.tab { flex: 1; font: inherit; font-size: 8px; padding: 10px 6px; border: 0; cursor: pointer; color: #5a3519; background: #d8c690; box-shadow: inset -3px -3px rgba(0, 0, 0, .18), inset 3px 3px rgba(255, 255, 255, .35), 0 0 0 3px #3a2410 }
+.tab.on { color: #fff; background: #3fa38a; box-shadow: inset -3px -3px #2a7a66, inset 3px 3px #6cd0b4, 0 0 0 3px #1d4f45 }
+.tab:not(.on):hover { transform: translateY(-2px) }
+
+h2 { font-size: 11px; color: #5a3519; text-shadow: 1px 1px #e6d9aa; margin-bottom: 8px }
+.hint { font-size: 7px; line-height: 13px; color: #8a6a40; margin-bottom: 14px }
+
+/* campos */
+.fld { margin-bottom: 12px }
+label { display: block; font-size: 7px; color: #8a6a40; margin-bottom: 6px }
+input { width: 100%; font: inherit; font-size: 9px; color: #2a1c10; background: #fffdf0; border: 0; padding: 11px 10px; outline: 0; box-shadow: inset 3px 3px #e6d9aa, 0 0 0 3px #5a3519 }
+input::placeholder { color: #b9a77c }
+input:focus { box-shadow: inset 3px 3px #e6d9aa, 0 0 0 3px #3fa38a, 0 0 10px rgba(63, 163, 138, .6) }
+.pw { position: relative }
+.pw input { padding-right: 52px }
+.eye { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font: inherit; font-size: 7px; color: #fff; background: #5a3519; border: 0; padding: 7px 6px; cursor: pointer }
+.eye:hover { filter: brightness(1.2) }
+
+.err { min-height: 26px; font-size: 7px; line-height: 13px; color: #c8504a; margin: 2px 0 8px }
+.go { width: 100%; font: inherit; font-size: 10px; color: #fff; background: #3fa38a; border: 0; padding: 14px; cursor: pointer; box-shadow: inset -4px -4px #2a7a66, inset 4px 4px #6cd0b4, 0 0 0 4px #1d4f45 }
+.go:hover { filter: brightness(1.12) }
+.go:active { transform: translateY(2px) }
+.go:disabled { filter: grayscale(.6); cursor: default }
+.sw { text-align: center; font-size: 7px; color: #8a6a40; margin-top: 14px; line-height: 14px }
+.sw button { font: inherit; font-size: 7px; color: #3b6fd8; background: none; border: 0; cursor: pointer; text-decoration: underline }
+.sw button:hover { color: #274a9a }
+
+/* login: esconde campos só do cadastro */
+.card[data-m=log] .only-reg { display: none }
+
+/* ===== tema HALLOWEEN (quando o usuário veio da página do Halloween) ===== */
+.hw .card { background: #2a1a3a; border-color: #14061c; box-shadow: inset 0 -4px #1c1028, 0 0 18px rgba(255, 120, 30, .35), 6px 6px 0 rgba(0, 0, 0, .45); animation: hwglow 3s ease-in-out infinite alternate }
+@keyframes hwglow { from { box-shadow: inset 0 -4px #1c1028, 0 0 12px rgba(255, 120, 30, .25), 6px 6px 0 rgba(0, 0, 0, .45) } to { box-shadow: inset 0 -4px #1c1028, 0 0 24px rgba(255, 120, 30, .5), 6px 6px 0 rgba(0, 0, 0, .45) } }
+.hw .card:after { content: '🕸️'; position: absolute; top: -6px; right: -8px; font-size: 22px; filter: drop-shadow(0 0 4px #b070ff); pointer-events: none }
+.hw h2 { color: #ffb060; text-shadow: 1px 1px #14061c }
+.hw h2:before { content: '🎃 ' }
+.hw .hint, .hw label, .hw .sw { color: #c9a0e8 }
+.hw .tab { color: #c9a0e8; background: #3c2a54; box-shadow: inset -3px -3px rgba(0, 0, 0, .3), inset 3px 3px rgba(255, 255, 255, .15), 0 0 0 3px #14061c }
+.hw .tab.on { color: #2a1408; background: #e8761a; box-shadow: inset -3px -3px #a8480a, inset 3px 3px #ffa84a, 0 0 0 3px #3a1408 }
+.hw input { color: #f0e0ff; background: #1c1028; box-shadow: inset 3px 3px #0e0718, 0 0 0 3px #14061c }
+.hw input::placeholder { color: #8a6aa8 }
+.hw input:focus { box-shadow: inset 3px 3px #0e0718, 0 0 0 3px #e8761a, 0 0 12px rgba(255, 120, 30, .7) }
+.hw .eye { background: #6a3a9c }
+.hw .err { color: #ff8a6a }
+.hw .go { color: #2a1408; background: #e8761a; box-shadow: inset -4px -4px #a8480a, inset 4px 4px #ffa84a, 0 0 0 4px #3a1408 }
+.hw .sw button { color: #ffb060 }
+.hw .sw button:hover { color: #ffd080 }
+.hw .logo { text-shadow: 3px 3px #14061c }
+.hw .btn.alt { color: #ffb060; background: #3a1c5a; box-shadow: inset -4px -4px #1c0a30, inset 4px 4px #6a3a9c, 0 0 0 4px #14061c, 0 0 14px rgba(255, 120, 30, .45) }
+.hw ::selection { background: #e8761a; color: #fff }
